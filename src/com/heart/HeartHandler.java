@@ -13,6 +13,8 @@ public class HeartHandler extends IdleStateAwareChannelHandler {
 	@Override
 	public void channelIdle(ChannelHandlerContext ctx, IdleStateEvent e) throws Exception {
 		
+		System.out.println(e.getState());
+		
 	}
 
 }

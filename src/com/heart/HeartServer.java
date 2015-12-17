@@ -32,12 +32,12 @@ public class HeartServer {
 		
 		//设置管道的工厂
 		bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
-			
+			HashedWheelTimer hashedWheelTimer = new HashedWheelTimer();
 			@Override
 			public ChannelPipeline getPipeline() throws Exception {
 
 				ChannelPipeline pipeline = Channels.pipeline();
-				pipeline.addLast("decoder", new IdleStateHandler(new HashedWheelTimer(), 5, 5, 10));
+				pipeline.addLast("decoder", new IdleStateHandler(hashedWheelTimer, 5, 5, 10));
 				pipeline.addLast("decoder", new StringDecoder());
 				pipeline.addLast("encoder", new StringEncoder());
 				pipeline.addLast("heartHandler", new HeartHandler());
